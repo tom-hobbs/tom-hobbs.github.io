@@ -9,11 +9,22 @@
                 margin-bottom: 10px;
                 margin-right: 150px;
                 margin-left: 15px;
-                background: #f5f5f5;}
-            h2 {margin-bottom: -10px;}
-            h3 {margin-bottom: -10px;}
-            iframe {width: 100vh;
-                height: 100vh;
+                background: #f5f5f5;
+                line-height: 140%;}
+            h3 {margin-bottom: -0.5em;}
+            img{width: 40%;
+                max-width: 40%;
+                height: 40%;
+                border: 0;}
+            sup {font-size: 0.8em;
+                line-height: 0;
+                position: relative;
+                vertical-align: baseline;
+                top: -0.5em;}
+            
+            iframe {width: 100%;
+                max-width: 100%;
+                height: 100%;
                 border: 0;}
 
             .cite {position: relative;
@@ -24,84 +35,103 @@
                 line-height: 1;
                 margin-left: 0em;}
 
-            .bibliography {margin-top: 2rem;
-                padding-top: 1rem;
+            .bibliography {margin-top: 2em;
+                padding-top: 1em;
                 border-top: 1px solid #ddd;}
             .bibliography li {margin: 0.5rem 0;}
             .bibliography li:target {background: #fff7cc;
                 border-radius: 0.4em;
                 padding: 0.3em 0.4em;}
+
         </style>
         <title>Mitochondrial LDH</title>
     </head>
     <body>
         <h1>Mitochondrial lactate dehydrogenase</h1>
         <p>Current understanding of intracellular lactate metabolism places lactate dehydrogenase (LDH) on the external side of the inner mitochondrial 
-            membrane <a class="cite" href="#ref1" id="cite1">1</a>, suggesting that lactate is not directly oxidised inside the mitochondrial matrix. However, recent evidence 
-            strongly suggests the presence of a lactate pool in the mitochondrial matrix. To re-examine the consequences of matrix LDH activity, I have 
+            membrane<a class="cite" href="#ref1" id="cite1">1</a>, suggesting that lactate is not directly oxidised inside the mitochondrial matrix. However, recent evidence 
+            strongly suggests the presence of a stable matrix lactate pool. To re-examine the consequences of matrix LDH activity, I have 
             adapted an existing in silico flux-balance analysis (FBA) metabolic model of the whole cell. The results show that mitochondrial LDH 
-            activity is metabolically advantageous at high ATP synthesis rates, with important implications for exercise metabolism.</p>
+            activity is metabolically advantageous at high ATP synthesis rates.</p>
 
-        <h2>Background</h2>
+        <section>
+            <h2>Background</h2>
+            <h3>Debate around mitochondrial LDH</h3>
+            <p>Direct mitochondrial lactate oxidation was proposed by in George Brooks in 1999<a class="cite" href="#ref2" id="cite2">2</a>. In that paper, mitochondria isolated from 
+                rat liver, skeleal muscle, and cardiac muscle were shown to have comparable state 3 and 4 respiration when respiring on either lactate or pyruvate alone (without addition of exogenous NAD<sup>+</sup>). Inclusion of oxamate, an LDH inhibitor, prevented
+                mitochondria from respiring on lactate but not pyruvate. Additionally, both western blot of isolated mitochondria and immunolabeling of tissue cross sections showed the presence
+                of LDH protein in mitochondria. Based on these results, it was concluded that mitochondria could directly oxidise lactate due to the presence of matrix LDH (Figure 1). 
+            </p>
 
-        <h3>Testing the model</h3>
+            <img src="assets/images/brooks1999.jpeg"></img>
 
-        <p>The first thing I did was to simulate the optimal carbon efficiency at different ATP synthesis rates using enzyme-constrained FBA. This formed a Pareto front, 
-            showing maximum attainable substrate efficiency at a given rate of ATP synthesis. Surprisingly, the inclusion of LDHm/MCTm improves substrate efficiency at high 
-            rates of ATP synthesis compared to both classical understanding, and the model including reversed mal-asp shuttle. Additionally, this does not require the 
-            reversed mal-asp shuttle, as the model including LDHm/MCTm was unchanged by removal  </p>
+            <p>This was an important result because it represented a new way that mitochondria could import NADH electrons. 
+            </p>
 
-        <p>The next question I had was why the inclusion of LDHm/MCTm improved substrate efficiency beyond the reversed mal-asp shuttle, since both strategies function 
-            via a similar mechanism of NADH export from the mitochondrial matrix. The first hypothesis I had was that in the original model, NADH export may become limited by enzymatic constraints on the reversed mal-asp 
-            shuttle. However, when analysing the original model . This reaction has no enzymatic contraints. 
-        </p>
-
-        <p>I next performed the same analyses using pFBA with both enzyme constraints and protein allocation constraints. The resulting
-            Pareto front shows that the difference between the model including LDHm/MCTm and the original model disappears. In fact, the Pareto front for these 
-            two models is identical. 
-
-        </p>
-
-        <h3>Validating the model against <i>in vivo</i> data</h3>
-        <p>In the original paper, the multi-tissue model is validated against gas exchange data. I wanted to check if this simplified model would also accurately represent rates of
-            intramuscular reaction fluxes measured <i>in vivo</i>. To do this, I contacted Dr Bartlett who provided me with original data from a 31P-MRS imaging study performed on human quadricep muscle during 
-            continuous isotonic knee extension exercise last 4 minuites. The data from the study allow an estimation of ATP synthesis by each major pathway; that is, 
-            glycolysis, mitochondrial ATP synthase, and phosphocreatine (PCr) breakdown. 
-
-            FBA analysis assumes steady-state concentrates of intramusuclar metabolites (except certain specific cases, including input carbon sources and lactate excretion). 
-            However, in the first seconds of exercise a large amount of phosphocreatine (PCr) is broken down to regenerate ATP. This PCr store is absent from the model. When filtering 
-            out approximately the first ~60 seconds of data (to obtain steady-state PCr concentrations), the data from Dr Bartlett's study correspond closely to the reaction fluxes 
-            predicted in the LDHm/MCTm model. 
-        </p>
+            <p>However, subsequent studies did not support this conclusion. Other laboratories did not find LDH activity or protein expression in mitochondria isolated from human and mouse skeletal muscle, 
+                and these isolated mitochondira were not able to respire on lactate<a class="cite" href="#ref3" id="cite3">3</a>. Similar results were obtained from mitochondria isolated from rat muscle<a class="cite" href="#ref4" id="cite4">4,</a><a class="cite" href="#ref5" id="cite5">5</a>. 
+                Additionally, intact rat and human myofibres permeablised with saponin are unable to to respire on lactate in the absence of NAD<sup>+</sup>, suggesting conversion to pyruvate must occur in the cytosol before oxidation<a class="cite" href="#ref6" id="cite6">6,</a><a class="cite" href="#ref7" id="cite7">7</a>.
+            </p>
 
 
-        <p>In order to determine which model occurs in vivo, I next sought potential ways to experimentally differentiate between the two models. The first step was to identify reactions
-            which carry different fluxes at a given rate of ATP synthesis. I therefore wrote a short python script to check which reactions differ between the two models at a given ATP flux.
-            This produced the following list:
+            <p>It is worth mentioning that in the original paper<a class="cite" href="#ref2" id="cite2">2</a>, inhibition of LDH did increase the observed state 3 and 4 respiration
+            of isolated mitochondria respiring on only pyruvate.</p>
+            <h3>Evidence for mitochondrial lactate oxidation</h3>
             <br>
-            ['HMR_3949', 'HMR_4139', 'HMR_4141', 'HMR_4388', 'HMR_4926', 'MT_LDH', 'MT_MCT']
+        </section>
+        
+        <section>
+            <h2>Investigating the metabolic consequences of LDHm</h2>
+            <h3>Testing the model</h3>
+
+            <p>The first thing I did was to simulate the optimal carbon efficiency at different ATP synthesis rates using enzyme-constrained FBA. This formed a Pareto front, 
+                showing maximum attainable substrate efficiency at a given rate of ATP synthesis. Surprisingly, the inclusion of LDHm/MCTm improves substrate efficiency at high 
+                rates of ATP synthesis compared to both classical understanding, and the model including reversed mal-asp shuttle. Additionally, this does not require the 
+                reversed mal-asp shuttle, as the model including LDHm/MCTm was unchanged by removal  </p>
+
+            <p>The next question I had was why the inclusion of LDHm/MCTm improved substrate efficiency beyond the reversed mal-asp shuttle, since both strategies function 
+                via a similar mechanism of NADH export from the mitochondrial matrix. The first hypothesis I had was that in the original model, NADH export may become limited by enzymatic constraints on the reversed mal-asp 
+                shuttle. However, when analysing the original model . This reaction has no enzymatic contraints. 
+            </p>
+
+            <p>I next performed the same analyses using pFBA with both enzyme constraints and protein allocation constraints. The resulting
+                Pareto front shows that the difference between the model including LDHm/MCTm and the original model disappears. In fact, the Pareto front for these 
+                two models is identical. 
+
+            </p>
+
+            <h3>Validating the model against <i>in vivo</i> data</h3>
+            <p>In the original paper, the multi-tissue model is validated against gas exchange data. I wanted to check if this simplified model would also accurately represent rates of
+                intramuscular reaction fluxes measured <i>in vivo</i>. To do this, I contacted Dr Bartlett who provided me with original data from a 31P-MRS imaging study performed on human quadricep muscle during 
+                continuous isotonic knee extension exercise lasting 4 minuites<a class="cite" href="#ref4" id="cite4">4</a>. The data from the study allow an estimation of ATP synthesis by each major pathway; that is, 
+                glycolysis, mitochondrial ATP synthase, and phosphocreatine (PCr) breakdown. 
+
+                FBA analysis assumes steady-state concentrates of intramusuclar metabolites (except certain specific cases, including input carbon sources and lactate excretion). 
+                However, in the first seconds of exercise a large amount of phosphocreatine (PCr) is broken down to regenerate ATP. This PCr store is absent from the model. When filtering 
+                out approximately the first ~60 seconds of data (to obtain steady-state PCr concentrations), the data from Dr Bartlett's study correspond closely to the reaction fluxes 
+                predicted in the LDHm/MCTm model. 
+            </p>
+
+
+            <p>In order to determine which model occurs in vivo, I next sought potential ways to experimentally differentiate between the two models. The first step was to identify reactions
+                which carry different fluxes at a given rate of ATP synthesis. I therefore wrote a short python script to check which reactions differ between the two models at a given ATP flux.
+                This produced the following list:
+                <br>
+                ['HMR_3949', 'HMR_4139', 'HMR_4141', 'HMR_4388', 'HMR_4926', 'MT_LDH', 'MT_MCT']
+                <br>
+                Because the LDHm and original models produce identical O2 conspumtion curves, they would be challenging to differentiate experimentally in vivo. 
+                The only reactions which
+                differ between 
+            </p>
+
+            <iframe src="assets/figures/fva.html"></iframe>
             <br>
-            Because the LDHm and original models produce identical O2 conspumtion curves, they would be challenging to differentiate experimentally in vivo. 
-            The only reactions which
-            differ between 
-        </p>
-
-
-
-
-        <iframe
-        src="pareto.html"
-        loading="lazy">
+        </section>
 
         <section class="bibliography">
             <h2>References</h2>
-            <ol>
-                <li id="ref1">
-                Glancy, B., Kane, D. A., Kavazis, A. N., Goodwin, M. L., Willis, W. T., & Gladden, L. B. (2021). Mitochondrial lactate metabolism: history and implications for exercise and disease. <i>The Journal of Physiology</i>, <i>599</i>(3), 863-888. <a>https://doi.org/10.1113/JP278930</a> 
-                <a href="#cite1">↩</a>
-                </li>
-
-            </ol>
+            <ol id="bibliography" data-bib-src="bibliography.html"></ol>
+            <script src="scripts/buildBibliography.js"></script>
         </section>
     
     </body>
