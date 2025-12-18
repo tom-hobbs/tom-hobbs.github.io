@@ -1,15 +1,14 @@
 async function loadBibliography() {
-  const bib = document.querySelector('#refs[data-bib-src]');
+  const bib = document.querySelector('#bibliography[data-bib-src]');
 
   const html = await (await fetch(bib.dataset.bibSrc)).text();
 
-  // Parse the fetched <li> list safely into DOM nodes
   const tmp = document.createElement('template');
   tmp.innerHTML = html.trim();
   bib.append(...tmp.content.childNodes);
 }
 
-
+document.addEventListener('DOMContentLoaded', loadBibliography);
 
 
 // function orderBibliography(){
